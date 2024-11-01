@@ -235,3 +235,17 @@ function jugar(personaje: Personaje) {
 
   personaje.correr();
 }
+
+//utility types
+
+interface Components {
+  procesador: string;
+  ram: number;
+  hdd: number;
+  motherboard: string;
+  GPU: string;
+}
+
+type Procesador = Pick<Components, "procesador">;
+
+type OmitirMotherboard = Omit<Components, "motherboard">;
