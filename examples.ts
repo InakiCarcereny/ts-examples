@@ -1,9 +1,9 @@
 //siempre tener cuidado con el any ya que no signifca que puede ser cualquier tipo sino que va mas alla, directamente le decimos que ignore el tipado.
 
 const persona = {
-  name: "Iñaki",
+  name: 'Iñaki',
   age: 20,
-  job: "Developer",
+  job: 'Developer',
 };
 
 persona.name;
@@ -21,7 +21,7 @@ function edad({ name, age }: { name: string; age: number }) {
 }
 
 function sayHi(fn: (name: string) => void) {
-  fn("Iñaki");
+  fn('Iñaki');
 }
 
 sayHi((name: string) => {
@@ -43,10 +43,10 @@ type Hero = {
 };
 
 const thor: Hero = {
-  name: "Thor",
+  name: 'Thor',
   age: 42,
-  job: "God",
-  power: "hammer",
+  job: 'God',
+  power: 'hammer',
 };
 
 function createHero(
@@ -63,13 +63,13 @@ function createHero(
   };
 }
 
-const spiderman = createHero("Spiderman", 16, "Web Developer", "hammer");
+const spiderman = createHero('Spiderman', 16, 'Web Developer', 'hammer');
 
 //optional chaining
 spiderman.power?.toLowerCase();
 
 //union types
-type Power = "hammer" | "sword";
+type Power = 'hammer' | 'sword';
 
 //intersection types
 type HumanName = {
@@ -83,7 +83,7 @@ type HumanAge = {
 type Human = HumanName & HumanAge;
 
 const persona2: Human = {
-  name: "Iñaki",
+  name: 'Iñaki',
   age: 20,
 };
 
@@ -97,50 +97,50 @@ type CityProps = {
   };
 };
 
-const city: CityProps["population"] = 1000000;
+const city: CityProps['population'] = 1000000;
 
-const city2: CityProps["country"]["name"] = "Spain";
+const city2: CityProps['country']['name'] = 'Spain';
 
 //type from value
 const address = {
-  street: "Calle de la República",
+  street: 'Calle de la República',
   number: 123,
-  city: "Madrid",
-  country: "Spain",
+  city: 'Madrid',
+  country: 'Spain',
 };
 
 type Address = typeof address;
 
 const argentina: Address = {
-  street: "Calle de la República",
+  street: 'Calle de la República',
   number: 123,
-  city: "Buenos Aires",
-  country: "Argentina",
+  city: 'Buenos Aires',
+  country: 'Argentina',
 };
 
-const deporte = "futbol";
+const deporte = 'futbol';
 
 type deporte = typeof deporte;
 
-const miDeporte: deporte = "futbol";
+const miDeporte: deporte = 'futbol';
 
 function human() {
-  return { name: "Iñaki", age: 20 };
+  return { name: 'Iñaki', age: 20 };
 }
 
 type Person = ReturnType<typeof human>;
 
 //arrays
-const languages: string[] = ["typescript", "javascript", "java"];
+const languages: string[] = ['typescript', 'javascript', 'java'];
 
-languages.push("python");
+languages.push('python');
 
 const cities: (string | number)[] = [];
 
 const asignatures: string[] | number[] = [];
 
 //unificacion
-type Cells = "x" | "o" | "";
+type Cells = 'x' | 'o' | '';
 type GameBoard = [
   [Cells, Cells, Cells],
   [Cells, Cells, Cells],
@@ -148,9 +148,9 @@ type GameBoard = [
 ];
 
 const gameBoard: GameBoard = [
-  ["", "", "x"],
-  ["", "x", "x"],
-  ["o", "", "x"],
+  ['', '', 'x'],
+  ['', 'x', 'x'],
+  ['o', '', 'x'],
 ];
 
 //generics
@@ -158,7 +158,7 @@ function giveSomething<T>(something: T): T {
   return something;
 }
 
-giveSomething<string>("pepe");
+giveSomething<string>('pepe');
 giveSomething<number>(10);
 giveSomething<boolean>(true);
 
@@ -172,19 +172,19 @@ function createProduct<T>({ name, price, quantity }: Product<T>): Product<T> {
   return { name, price, quantity };
 }
 
-createProduct({ name: "pepe", price: 10, quantity: "uno" });
-createProduct({ name: "pepe", price: 10, quantity: 1 });
+createProduct({ name: 'pepe', price: 10, quantity: 'uno' });
+createProduct({ name: 'pepe', price: 10, quantity: 1 });
 
 //keyof
 const sonidos = {
-  perro: "woof",
-  gato: "meow",
-  llama: "baa",
+  perro: 'woof',
+  gato: 'meow',
+  llama: 'baa',
 };
 
 type Sonidos = keyof typeof sonidos;
 
-const sonidoPerro: Sonidos = "perro";
+const sonidoPerro: Sonidos = 'perro';
 
 //enums
 const enum Color {
@@ -206,7 +206,7 @@ function generateColor(): Color {
 
 //narrowing
 function mostrarLongitud(objeto: string | number) {
-  if (typeof objeto === "string") {
+  if (typeof objeto === 'string') {
     console.log(objeto.length);
   } else {
     console.log(objeto);
@@ -214,13 +214,13 @@ function mostrarLongitud(objeto: string | number) {
 }
 
 interface Mario {
-  company: "Nintendo";
+  company: 'Nintendo';
   nombre: string;
   saltar: () => void;
 }
 
 interface Sonic {
-  company: "Sega";
+  company: 'Sega';
   nombre: string;
   correr: () => void;
 }
@@ -228,7 +228,7 @@ interface Sonic {
 type Personaje = Mario | Sonic;
 
 function jugar(personaje: Personaje) {
-  if (personaje.company === "Nintendo") {
+  if (personaje.company === 'Nintendo') {
     personaje.saltar();
     return;
   }
@@ -246,6 +246,19 @@ interface Components {
   GPU: string;
 }
 
-type Procesador = Pick<Components, "procesador">;
+type Procesador = Pick<Components, 'procesador'>;
 
-type OmitirMotherboard = Omit<Components, "motherboard">;
+type OmitirMotherboard = Omit<Components, 'motherboard'>;
+
+interface PersonProps<T extends object> {
+  data: T;
+}
+
+const inaki: PersonProps<{ name: string; age: number }> = {
+  data: {
+    name: 'Iñaki',
+    age: 20,
+  },
+};
+
+console.log(inaki);
